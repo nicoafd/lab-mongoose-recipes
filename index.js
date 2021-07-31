@@ -34,16 +34,22 @@ mongoose
     // Run your code here, after you have insured that the connection was made
   })
   .then((response) => {
-    console.log("2. Showing just the title: ", response.title);
+    console.log("2. Showing just the title: ", response.title); // only works because it is one object, not an array
 
     return Recipe.insertMany(data);
+    // >>>>?? what you talking about duplicates? commenting out what?
+
   })
   .then((response) => {
-    console.log("3. Recipes added correctly", response);
-    // >>>? how to print titles for iteration 3
+    console.log("3. Recipes added correctly");
+
+    response.forEach((dish) => {
+      console.log(dish.title);
+    }); // to print titles for iteration 3
+
     return Recipe.findOneAndUpdate(
       { title: "Rigatoni alla Genovese" },
-      { duration: 100 }, 
+      { duration: 100 },
       { new: true }
     );
   })
@@ -55,6 +61,10 @@ mongoose
   })
   .then(response => {
     console.log("5. Ciao Cake de Carotte", response)
+    return mongoose.disconnect();
+  })
+  .then(response => {
+    console.log("DB Disconnected successfuly!")
   })
   .catch((error) => {
     console.error("Error connecting to the database", error);
