@@ -20,7 +20,13 @@ mongoose
     return Recipe.deleteMany()
   })
   .then(() => {
+    // create
+    //return Recipe.create( { title: "Pimientos de Padron", level: "Easy Peasy", ingredients: ["Salt", "Pimientos de Padron", "Olive Oil"], cuisine: "Spanish", dishType: "snack", duration: 15, creator: "Kick" } )
     // Run your code here, after you have insured that the connection was made
+
+  })
+  .then(response => {
+    console.log("1. Showing just the title: ", response.title)
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
